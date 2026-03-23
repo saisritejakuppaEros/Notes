@@ -36,13 +36,13 @@ https://www.hungrycoders.com/blog/system-design-roadmap-from-basics-to-advanced
 
 ### Phase 2A — First 5 Concept Days
 
-|Day|Date|Topic|
-|---|---|---|
-|Day 11|Apr 2 (Thu)|Deep Dive into Databases — Indexing, Sharding, Replication|
-|Day 12|Apr 3 (Fri)|Caching Strategies — Write-through, Write-back, Cache Invalidation|
-|Day 13|Apr 4 (Sat)|Message Queues & Async Systems — Kafka, RabbitMQ|
-|Day 14|Apr 5 (Sun)|Rate Limiting|
-|Day 15|Apr 6 (Mon)|API Gateway|
+| Day    | Date        | Topic                                                              |
+| ------ | ----------- | ------------------------------------------------------------------ |
+| Day 11 | Apr 2 (Thu) | Deep Dive into Databases — Indexing, Sharding, Replication         |
+| Day 12 | Apr 3 (Fri) | Caching Strategies — Write-through, Write-back, Cache Invalidation |
+| Day 13 | Apr 4 (Sat) | Message Queues & Async Systems — Kafka, RabbitMQ                   |
+| Day 14 | Apr 5 (Sun) | Rate Limiting                                                      |
+| Day 15 | Apr 6 (Mon) | API Gateway                                                        |
 
 ### Phase 2A — Beginner Revision (2 days)
 

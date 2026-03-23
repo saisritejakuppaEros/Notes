@@ -1,6 +1,5 @@
 
 
-
 # **Generative AI**
 
 [[Image Generation]] - this is about image generation 
@@ -9,5 +8,4 @@
 
 # System Design
 [[system design Lectures]] - for system design
-
 

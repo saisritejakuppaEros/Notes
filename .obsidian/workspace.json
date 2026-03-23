@@ -13,6 +13,20 @@
             "state": {
               "type": "markdown",
               "state": {
+                "file": "atlas/notes/system design Lectures.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "system design Lectures"
+            }
+          },
+          {
+            "id": "ab303f68a58c56c0",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
                 "file": "efforts/Notes/system design/may23 - Introduction to system design.md",
                 "mode": "source",
                 "source": false
@@ -20,8 +34,23 @@
               "icon": "lucide-file",
               "title": "may23 - Introduction to system design"
             }
+          },
+          {
+            "id": "010ab5e3f307e401",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "efforts/sleeping/system design timeline.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "system design timeline"
+            }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -194,20 +223,20 @@
       "obsidian-kanban:Create new board": false
     }
   },
-  "active": "9d745ab1b8b81438",
+  "active": "ab303f68a58c56c0",
   "lastOpenFiles": [
-    "efforts/Ongoing/genie.md",
+    "atlas/notes/system design Lectures.md",
     "efforts/sleeping/system design timeline.md",
     "efforts/Notes/system design/may23 - Introduction to system design.md",
+    "atlas/maps/Field of works.md",
+    "efforts/Ongoing/genie.md",
+    "atlas/notes/image generation timeline.md",
+    "calender/notes/2026-03-17.md",
     "images/lld vs hld.png",
     "images/systemcycle.png",
     "images",
-    "calender/notes/2026-03-17.md",
     "Introduction.md",
     "efforts/Notes/system design",
-    "atlas/notes/system design Lectures.md",
-    "atlas/maps/Field of works.md",
-    "atlas/notes/image generation timeline.md",
     "README.md",
     "atlas/notes",
     "efforts/Notes/Image Generation Work.md",
