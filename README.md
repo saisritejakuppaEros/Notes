@@ -1,6 +1,18 @@
 # Notes vault
 
-This folder is an **Obsidian vault** organized around the **ACE framework** from Nick Milo ([Linking Your Thinking](https://www.linkingyourthinking.com/)). ACE is a note-taking and folder layout for Obsidian built on **links**, not only nested folders.
+## Get started
+
+1. **Install Obsidian** — Download the app from [obsidian.md/download](https://obsidian.md/download).
+2. **Clone this repo** (pick a parent folder you like):
+
+   ```bash
+   git clone https://github.com/saisritejakuppaEros/Notes.git
+   cd Notes
+   ```
+
+3. **Open the vault** — Launch Obsidian → **Open folder as vault** → choose the cloned `Notes` folder (the one that contains this `README.md` and `.obsidian`).
+
+This vault is organized around the **ACE framework** from Nick Milo ([Linking Your Thinking](https://www.linkingyourthinking.com/)): a note layout for Obsidian built on **links**, not only nested folders.
 
 ## What ACE is
 
@@ -38,6 +50,5 @@ Skip deep subfolders until your own structure feels necessary. A larger variant 
 
 ## Using Obsidian here
 
-1. Open this folder in [Obsidian](https://obsidian.md/) as a vault.  
-2. Connect notes with `[[wikilinks]]` — that’s central to how ACE is meant to work.  
-3. Change look and plugins in **Settings** (updates `.obsidian/`).
+1. Connect notes with `[[wikilinks]]` — that’s central to how ACE is meant to work.  
+2. Change look and plugins in **Settings** (updates `.obsidian/`).
