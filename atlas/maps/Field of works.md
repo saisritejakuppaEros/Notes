@@ -3,7 +3,7 @@
 # **Generative AI**
 
 [[Image Generation]] - this is about image generation 
-[[genie]] - making a version of genie for 3d worlds
+[[genie -  prior research]] - making a version of genie for 3d worlds
 
 
 # System Design
