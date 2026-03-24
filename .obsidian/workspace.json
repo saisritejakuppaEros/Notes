@@ -4,53 +4,123 @@
     "type": "split",
     "children": [
       {
-        "id": "3b3b8f160913c3c3",
+        "id": "e9a416a4669df189",
         "type": "tabs",
         "children": [
           {
-            "id": "9d745ab1b8b81438",
+            "id": "a69b4a8a02a57af2",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "atlas/notes/system design Lectures.md",
+                "file": "Welcome.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "system design Lectures"
+              "title": "Welcome"
             }
           },
           {
-            "id": "ab303f68a58c56c0",
+            "id": "061750c63ccb95d7",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "efforts/Notes/system design/may23 - Introduction to system design.md",
+                "file": "sample_template.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "may23 - Introduction to system design"
+              "title": "sample_template"
             }
           },
           {
-            "id": "010ab5e3f307e401",
+            "id": "d0f1ed2d6c1d1578",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "efforts/sleeping/system design timeline.md",
+                "file": "atlas/maps/Field of works.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "system design timeline"
+              "title": "Field of works"
+            }
+          },
+          {
+            "id": "e71ff4d4ffe2da83",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "atlas/maps/Field of works.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Field of works"
+            }
+          },
+          {
+            "id": "7446f367e01d894e",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "efforts/Notes/Image Generation Work.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Image Generation Work"
+            }
+          },
+          {
+            "id": "8649dfd1b10905fd",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "efforts/Ongoing/genie.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "genie"
+            }
+          },
+          {
+            "id": "e698012e994e2153",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "atlas/maps/Field of works.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Field of works"
+            }
+          },
+          {
+            "id": "8d97ea4c756ec9a5",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "calender/notes/2026-03-17.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "2026-03-17"
             }
           }
         ],
-        "currentTab": 1
+        "currentTab": 7
       }
     ],
     "direction": "vertical"
@@ -185,13 +255,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "atlas/notes/image generation timeline.md",
+                "file": "calender/notes/2026-03-17.md",
                 "followCursor": false,
                 "showSearch": true,
                 "searchQuery": "calender"
               },
               "icon": "lucide-list",
-              "title": "Outline of image generation timeline"
+              "title": "Outline of 2026-03-17"
             }
           },
           {
@@ -223,21 +293,18 @@
       "obsidian-kanban:Create new board": false
     }
   },
-  "active": "ab303f68a58c56c0",
+  "active": "8d97ea4c756ec9a5",
   "lastOpenFiles": [
-    "atlas/notes/system design Lectures.md",
     "efforts/sleeping/system design timeline.md",
     "efforts/Notes/system design/may23 - Introduction to system design.md",
-    "atlas/maps/Field of works.md",
-    "efforts/Ongoing/genie.md",
-    "atlas/notes/image generation timeline.md",
-    "calender/notes/2026-03-17.md",
-    "images/lld vs hld.png",
-    "images/systemcycle.png",
-    "images",
-    "Introduction.md",
     "efforts/Notes/system design",
+    "atlas/notes/system design Lectures.md",
+    "Introduction.md",
+    "efforts/Ongoing/genie.md",
+    "calender/notes/2026-03-17.md",
+    "atlas/notes/image generation timeline.md",
     "README.md",
+    "atlas/maps/Field of works.md",
     "atlas/notes",
     "efforts/Notes/Image Generation Work.md",
     "efforts/sleeping/agentic ai.md",
@@ -252,6 +319,7 @@
     "calender/2026-03-11.md",
     "ultis/images",
     "ultis",
+    "atlas/notes",
     "atlas/2026-03-20.md",
     "atlas/2026-03-23.md",
     "Welcome.md",
@@ -263,6 +331,7 @@
     "calender/2026-03-10.md",
     "OB_Template/00 - Templates/10 - Entertainment/10.4 - Movies&Shows_V2.md",
     "OB_Template/00 - Templates/03 - Project/3.1 - Project.md",
-    "OB_Template/00 - Templates/03 - Project/3.2 - ActionPlan.md"
+    "OB_Template/00 - Templates/03 - Project/3.2 - ActionPlan.md",
+    "OB_Template/00 - Templates/04 - Course/4.2 - CourseNote.md"
   ]
 }
