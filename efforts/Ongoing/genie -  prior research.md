@@ -38,5 +38,15 @@ List of sources for the implementations of the world models:
 | [gist summary](https://gist.github.com/thehunmonkgroup/fb64746d70b2dcebd6b67c18e6507119) [gist.github](https://gist.github.com/thehunmonkgroup/fb64746d70b2dcebd6b67c18e6507119)​           | Readable mechanics walkthrough                                        |
 
 
+Looking at the survey on a large scale:
+https://arxiv.org/pdf/2411.14499
+
+what does world model mean?
+1. does it knows about the current knowledge?
+2. should it be able to predict the next event what happens?
+
+
+
+
 
 
