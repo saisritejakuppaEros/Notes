@@ -1,12 +1,8 @@
 # Multi-View Image Generation
 
-<details open>
-<summary>Table of Contents</summary>
-
-- [24 March 2026](#24-march-2026)
-- [25 March 2026](#25-march-2026)
-
-</details>
+> [!abstract]- 📚 Table of Contents (click to expand)
+> - [[#24 March 2026]]
+> - [[#25 March 2026]]
 
 <a id="24-march-2026"></a>
 ## 24 March 2026
