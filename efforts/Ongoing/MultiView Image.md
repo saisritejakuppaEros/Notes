@@ -1,6 +1,6 @@
 # Multi-View Image Generation
 
-> [!abstract]- 📚 Table of Contents (click to expand)
+> [!abstract] 📚 Table of Contents (click to expand)
 > - [[#24 March 2026]]
 > - [[#25 March 2026]]
 
@@ -56,8 +56,9 @@ The LoRA sees the `og_latent` being denoised, but at each step it **cross‑atte
 
 ---
 
-<a id="25-march-2026"></a>
-## 25 March 2026 – Experiments
+## 25 March 2026
+
+### Experiments
 
 ### Layout LLM
 
