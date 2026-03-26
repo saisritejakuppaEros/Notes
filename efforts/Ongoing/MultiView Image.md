@@ -3,8 +3,8 @@
 <details open>
 <summary>Table of Contents</summary>
 
-- [24 March 2026](#24‑march‑2026)
-- [25 March 2026](#25‑march‑2026)
+- [24 March 2026](#24-march-2026)
+- [25 March 2026](#25-march-2026)
 
 </details>
 
