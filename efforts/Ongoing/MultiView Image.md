@@ -8,7 +8,8 @@
 
 </details>
 
-## 24 March 2026
+<a id="24-march-2026"></a>
+## 24 March 2026
 
 ### Overview
 
@@ -59,7 +60,8 @@ The LoRA sees the `og_latent` being denoised, but at each step it **cross‑atte
 
 ---
 
-## 25 March 2026 – Experiments
+<a id="25-march-2026"></a>
+## 25 March 2026 – Experiments
 
 ### Layout LLM
 
