@@ -15,18 +15,18 @@ https://www.hungrycoders.com/blog/system-design-roadmap-from-basics-to-advanced
 
 **Duration:** 10 days (Mar 23 – Apr 1)
 
-| Day    | Date         | Topic                                                |
-| ------ | ------------ | ---------------------------------------------------- |
-| Day 1  | Mar 23 (Mon) | What is System Design? + Types of Systems            |
-| Day 2  | Mar 24 (Tue) | Basic Building Blocks — Client, Server, Network, DNS |
-| Day 3  | Mar 25 (Wed) | Latency vs Throughput                                |
-| Day 4  | Mar 26 (Thu) | Horizontal vs Vertical Scaling                       |
-| Day 5  | Mar 27 (Fri) | Load Balancers                                       |
-| Day 6  | Mar 28 (Sat) | Caching — CDN + Application Cache                    |
-| Day 7  | Mar 29 (Sun) | Databases — SQL vs NoSQL                             |
-| Day 8  | Mar 30 (Mon) | CAP Theorem                                          |
-| Day 9  | Mar 31 (Tue) | Consistency Models — Strong vs Eventual              |
-| Day 10 | Apr 1 (Wed)  | Basic API Design (REST)                              |
+| Day    | Date         | Topic                                                |     |
+| ------ | ------------ | ---------------------------------------------------- | --- |
+| Day 1  | Mar 23 (Mon) | What is System Design? + Types of Systems            |     |
+| Day 2  | Mar 24 (Tue) | Basic Building Blocks — Client, Server, Network, DNS |     |
+| Day 3  | Mar 25 (Wed) | Latency vs Throughput                                |     |
+| Day 4  | Mar 26 (Thu) | Horizontal vs Vertical Scaling                       |     |
+| Day 5  | Mar 27 (Fri) | Load Balancers                                       |     |
+| Day 6  | Mar 28 (Sat) | Caching — CDN + Application Cache                    |     |
+| Day 7  | Mar 29 (Sun) | Databases — SQL vs NoSQL                             |     |
+| Day 8  | Mar 30 (Mon) | CAP Theorem                                          |     |
+| Day 9  | Mar 31 (Tue) | Consistency Models — Strong vs Eventual              |     |
+| Day 10 | Apr 1 (Wed)  | Basic API Design (REST)                              |     |
 
 ---
 

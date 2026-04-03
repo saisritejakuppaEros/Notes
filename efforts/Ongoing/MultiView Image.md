@@ -3,6 +3,8 @@
 > [!abstract] 📚 Table of Contents (click to expand)
 > - [[#24 March 2026]]
 > - [[#25 March 2026]]
+> - [[#26 March 2026]]
+> 
 
 <a id="24-march-2026"></a>
 ## 24 March 2026
@@ -97,6 +99,9 @@ pivoting to use sam3d.
 
 Setting up sam3d is tought, due to dependecy issues, so i have migrated to using hunyun2.1 for generating multiple view of the same object.
 
-
 i have run hunyain 2.1, but realized the meshes are not looking that great to be said.
 Humans are not doing that good in that.
+
+March 2:
+
+working on the synthetic dataset generation for the evaluation. This is because, there is not a global testset for this, so for this we are doing a basic testing set so that we can benchmark 3 different things in the first place.
