@@ -49,3 +49,6 @@ March 24:
 
 Notes on GameNGen : [[GameNGen]]
 Notes on Genie: [[Genie]]
+
+March 2:
+Medium Blogs: gamegenx, matrixgame1,3
