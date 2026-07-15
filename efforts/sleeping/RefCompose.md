@@ -127,4 +127,17 @@ Immediate things to do for the and trouble shoot things so that i can make the s
 2. Use depth information for the sake of overlapping images not randomly
 3. Use dift to translate or rotate in the canvas itself so that it can deal things in the first place along with the depth map
 
-I need to compare aganist canvas to image model as well for this approach.
+I need to compare against canvas to image model as well for this approach.
+
+
+Since the depth is not really doing the job, I am using the sift ops to get the object in the place and the depth being given as well to get the structure.
+
+
+https://colab.research.google.com/github/zszazi/MSD/blob/master/SIFT_feature_matching.ipynb
+
+I have tried using sift algorithm the image key point matching is so bad using this.
+
+LightGlue is doing better when you do the map between the images in the crop and the reference image decently.
+
+the further goal is to make the homography to happen prior so that it can help the model much better and then get the results for the inference better. 
+
