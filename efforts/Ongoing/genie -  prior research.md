@@ -52,3 +52,7 @@ Notes on Genie: [[Genie]]
 
 March 2:
 Medium Blogs: gamegenx, matrixgame1,3
+
+
+July 15:
+Working on the world model dataset generation pipeline of things.

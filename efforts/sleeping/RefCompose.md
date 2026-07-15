@@ -1,11 +1,5 @@
+
 # Multi-View Image Generation
-
-> [!abstract] 📚 Table of Contents (click to expand)
-> - [[#24 March 2026]]
-> - [[#25 March 2026]]
-> - [[#26 March 2026]]
-> 
-
 <a id="24-march-2026"></a>
 ## 24 March 2026
 
@@ -105,3 +99,32 @@ Humans are not doing that good in that.
 March 2:
 
 working on the synthetic dataset generation for the evaluation. This is because, there is not a global testset for this, so for this we are doing a basic testing set so that we can benchmark 3 different things in the first place.
+
+
+## July 15
+
+Update:
+Submitted Paper to the BMVC and got rejected because of the main things
+
+The reviews for the rejections are kept over here:
+https://docs.google.com/document/d/1hhy_V9yZvXOeUHM-jRwu--1eBBx_TJe1/edit?rtpof=true&sd=true
+
+
+Major flaws include
+1. dataset preparation
+2. limit in novetly
+3. depth based rotation not working out in the first place.
+4. Cultural aspect is gone and not maintained that well.
+
+Model is praised for the approach 
+1. bringing all the reference images into the canvas so that you are doing token compression
+
+Plan to submit for some workshop paper if things go well. AI for Visual Arts is the one to aim for over now.
+
+Immediate things to do for the and trouble shoot things so that i can make the system work
+
+1. Flux 2.0 model can generate things the right way, its about making it more asthetic and compressed in the right way.
+2. Use depth information for the sake of overlapping images not randomly
+3. Use dift to translate or rotate in the canvas itself so that it can deal things in the first place along with the depth map
+
+I need to compare aganist canvas to image model as well for this approach.
