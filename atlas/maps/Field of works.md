@@ -7,6 +7,8 @@ Training the Image Generation work:
 [[genie -  prior research]] - making a version of genie for 3d worlds
 world models - working on the world models
 RefCompose - working on multi reference image composition
+tensorrt - this is work on the model deployment
+
 ## NLP 
 Agentic AI
 
