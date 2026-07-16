@@ -141,3 +141,13 @@ LightGlue is doing better when you do the map between the images in the crop and
 
 the further goal is to make the homography to happen prior so that it can help the model much better and then get the results for the inference better. 
 
+# July 16
+
+I see that the model is now capable of generating pictures from the reference images, but i need the model to pick up the cues from the reference images rather than the prompt. 
+
+Prompt engineering work is to be done so that it can pickup the cues from the reference images over the prompt
+
+1. Parth dataset to be fixed with valid prompts.
+2. Teja dataset to be fixed with valid prompts for both the landmarks and synthetic dataset. Both of them.
+
+Dift based inference so that to check if the previous models are capable enough to take care of this?
