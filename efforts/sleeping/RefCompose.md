@@ -180,3 +180,12 @@ make a module running with the samples given a decent way to setup so that the o
 compare with qwen image edit so that we can show the sticker effect aganist the qwen image edit, where realism is more in the paper we have with us.
 
 rewrite the paper based on the insights we got from the reviews.
+
+
+This is the benchmarking paper:
+http://arxiv.org/html/2606.15867v1
+
+Buildup the things based on this so that we can tackle the things further.
+
+Somehow show that u can control the orinetation of the object because we are capable of doing this based on the depth.
+
