@@ -151,3 +151,23 @@ Prompt engineering work is to be done so that it can pickup the cues from the re
 2. Teja dataset to be fixed with valid prompts for both the landmarks and synthetic dataset. Both of them.
 
 Dift based inference so that to check if the previous models are capable enough to take care of this?
+
+
+# July 17
+
+I have realized that the model is working good on a black canvas 
+
+from the depth orientation is got and the from the canvas the textures are retrived.
+
+The dataset is also prepared and pushed, but now the past vm is not working so i am setting things up in the new vm
+
+Things to do:
+Paper writing part for the new dataset pipeline and the inference process so that we can opensource the codebase and the make the repo setup for the submission of the paper.
+
+Inference on a different set of images needs to be done so that we are able to get the depth the right way for making things possible.
+
+Get all the reviews and make the paper to be updated first, prepare a seperate benchmark to prove things so that you are having multi reference images to be done.
+
+results to bring closer to the original metrics for that paper that evals the things so that we are closer to the original paper for the progress.
+
+Make the timeline for doing things and the write up the paper for the updates.

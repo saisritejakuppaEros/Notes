@@ -97,12 +97,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "efforts/Notes/ImageGeneration/03_architecture_designs.md",
+                "file": "efforts/sleeping/RefCompose.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "03_architecture_designs"
+              "title": "RefCompose"
             }
           }
         ],
@@ -281,14 +281,14 @@
   },
   "active": "06f842e11b96b3b7",
   "lastOpenFiles": [
-    "efforts/Notes/language modelling from scratch/03_architectures.md",
-    "calender/2026-07-15.md",
+    "calender/2026-07-17.md",
     "calender/2026-07-16.md",
     "efforts/Notes/ImageGeneration/03_architecture_designs.md",
+    "efforts/Notes/language modelling from scratch/03_architectures.md",
+    "calender/2026-07-15.md",
     "efforts/sleeping/tensorrt.md",
     "Untitled",
     "README.md",
-    "calender/2026-07-17.md",
     "efforts/Notes/EdgeDevice AI/On DeviceAI.md",
     "efforts/Notes/EdgeDevice AI",
     "efforts/Notes/ImageGeneration/Image Generation.md",
