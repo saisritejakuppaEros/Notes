@@ -171,3 +171,12 @@ Get all the reviews and make the paper to be updated first, prepare a seperate b
 results to bring closer to the original metrics for that paper that evals the things so that we are closer to the original paper for the progress.
 
 Make the timeline for doing things and the write up the paper for the updates.
+
+
+Dataset Preperation re writing and then the benchmark to be standard,
+
+make a module running with the samples given a decent way to setup so that the other can run based on the reference images given.
+
+compare with qwen image edit so that we can show the sticker effect aganist the qwen image edit, where realism is more in the paper we have with us.
+
+rewrite the paper based on the insights we got from the reviews.
