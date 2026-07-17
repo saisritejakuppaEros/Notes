@@ -55,12 +55,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "efforts/Notes/language modelling from scratch/02_pytorch.md",
+                "file": "calender/2026-07-17.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "02_pytorch"
+              "title": "2026-07-17"
             }
           }
         ],
@@ -237,18 +237,19 @@
       "obsidian-kanban:Create new board": false
     }
   },
-  "active": "cd488c4c0bf6fcea",
+  "active": "c5f14e63173601ac",
   "lastOpenFiles": [
-    "efforts/Notes/language modelling from scratch/01_tokenization.md",
+    "calender/2026-07-16.md",
+    "calender/2026-07-17.md",
     "efforts/Notes/language modelling from scratch/02_pytorch.md",
     "efforts/Notes/ImageGeneration/01_tokenization.md",
+    "efforts/Notes/ImageGeneration/Image Generation.md",
+    "efforts/Notes/language modelling from scratch/01_tokenization.md",
     "Untitled 1.md",
     "Untitled",
     "efforts/Notes/language modelling from scratch",
-    "calender/2026-07-16.md",
     "efforts/sleeping/RefCompose.md",
     "efforts/Ongoing/genie -  prior research.md",
-    "efforts/Notes/ImageGeneration/Image Generation.md",
     "README.md",
     "calender/2026-07-15.md",
     "efforts/sleeping/agentic ai.md",
@@ -270,7 +271,6 @@
     "calender/notes/2026-04-03.md",
     "calender/notes/2026-04-02.md",
     "calender/notes/2026-03-25.md",
-    "calender/notes/2026-03-24.md",
     "efforts/Notes/world models",
     "images/lld vs hld.png",
     "images/systemcycle.png",

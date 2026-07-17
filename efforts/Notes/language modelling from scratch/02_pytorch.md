@@ -89,7 +89,7 @@ Summary:
 - Key distinction: MLPs have no cross-input interaction; transformers model contextual relationships via self-attention — this is why they scale to billion/trillion-token regimes (GPT, Llama, Gemini) while MLPs stay suited to simpler tabular/classification tasks
 
 
-
+# Detailed Notes
 
 # Estimating Training Time and Maximum Model Size
 
