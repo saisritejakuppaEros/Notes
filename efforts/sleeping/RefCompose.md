@@ -189,3 +189,9 @@ Buildup the things based on this so that we can tackle the things further.
 
 Somehow show that u can control the orinetation of the object because we are capable of doing this based on the depth.
 
+
+
+July 18 and 19
+
+The picture for the papers  are in progress and has created all the necessary pictures.
+
