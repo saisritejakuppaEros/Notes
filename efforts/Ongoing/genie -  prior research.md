@@ -56,6 +56,10 @@ Medium Blogs: gamegenx, matrixgame1,3
 # July 15:
 Working on the world model dataset generation pipeline of things.
 
+
+
+---
+
 # July 20:
 
 Priority 1:
@@ -307,6 +311,10 @@ Datasets for training purpose:
 datasets for the panaroma generation
 datasets for the camera controlled video generation
 
+
+
+---
+
 # 21 July
 
 tasks to do 
@@ -357,8 +365,6 @@ Interior of the room
 
 
 
-
-
 ```
 
 
@@ -380,7 +386,7 @@ export LLM_ADDR=localhost
 export LLM_PORT=8000
 export LLM_NAME=Qwen/Qwen3-VL-8B-Instruct
 
-cd /devwork/teja/HY-World-2.0/hyworld2/worldgen
+	cd /devwork/teja/HY-World-2.0/hyworld2/worldgen
 
 CUDA_VISIBLE_DEVICES=1 torchrun --nproc_per_node 1 traj_render.py \
   --target_path "$TARGET_PATH" \
@@ -410,13 +416,14 @@ CUDA_VISIBLE_DEVICES=1 torchrun --nproc_per_node 1 gen_gs_data.py \
 ls "$TARGET_PATH/gs_data/images" | wc -l
 ls "$TARGET_PATH/gs_data/cameras.json"
 
-export TARGET_PATH=/devwork/teja/HY-World-2.0/scenes/tanu_weds_manu_room
-export RESULT_DIR=/devwork/teja/HY-World-2.0/scenes/tanu_weds_manu_room/gs_output
+
 
 export TARGET_PATH=/devwork/teja/HY-World-2.0/scenes/tanu_weds_manu_room
+
 export RESULT_DIR=/devwork/teja/HY-World-2.0/scenes/tanu_weds_manu_room/gs_output
 
 cd /devwork/teja/HY-World-2.0/hyworld2/worldgen
+
 
 CUDA_VISIBLE_DEVICES=0 python -m world_gs_trainer default \
   --data_dir "$TARGET_PATH/gs_data" \
@@ -431,9 +438,78 @@ CUDA_VISIBLE_DEVICES=0 python -m world_gs_trainer default \
   --strategy.refine-every 533 --strategy.refine-scale2d-stop-iter 4000 \
   --strategy.reset-every 99990 --strategy.grow-grad2d 0.0001 --strategy.prune-scale3d 0.1
 
+
+
 python show_gs.py --port 8081 --gpu_id 0 \
   --ckpt "$RESULT_DIR/ckpts/ckpt_7999_rank*.pt"
   
   
+  
 
 ```
+
+
+
+--- 
+
+
+# July 22
+
+The hy world 2.0 works so that you are taken the shots from the panaroma and the trajectory proceeding it with the hunyuan world follwoed by the video model to inpaint the things.
+
+But the panaroma generation is the bottle neck, becasue building things from the ground up is the bigger deal, so we will be working with the hunyuan mirror directly rather than going with the panaromic shots in the first place.
+
+
+we are having non overlapping set of images and now we are using the vggt to build the peusdo 3d room of it and then we will be using it as a mesh in the end. Thats the goal.
+
+
+
+the problem with the total is the scene looks good, but the 3d env is not looking that closer to that of the movie, now the goal is to push it further
+
+
+```
+export HF_HOME=/workspace/hf-cache
+export TORCH_HOME=/workspace/torch-cache
+export PIP_CACHE_DIR=/workspace/users/$USER/.pip-cache
+source /workspace/teja/envs/3dsyntheticdays/syntheticdata/bin/activate
+```
+
+This is to generate the segmentation image.
+
+
+```
+source /devwork/MiniConda/miniconda3/etc/profile.d/conda.sh
+conda activate gsplat_env
+export HF_HOME=/workspace/teja/models
+export HF_HUB_CACHE=/workspace/teja/models/hub
+
+generate the world mirror from the images so that we can come closer to the original scene, to have the consistency
+
+
+
+
+
+
+source /devwork/MiniConda/miniconda3/etc/profile.d/conda.sh
+conda activate gsplat_env
+
+cat > /devwork/teja/HY-World-2.0/inference_output/masked_images/20260722_101416/position_meta_info.json << 'EOF'
+{
+  "up_direction": [-1, 0, 0],
+  "facing_direction": [0.0, 0.0, -1.0],
+  "center_point": [0, 0, 0]
+}
+EOF
+
+cd /devwork/teja/HY-World-2.0/hyworld2/worldgen
+
+CUDA_VISIBLE_DEVICES=0 python show_gs.py \
+  --port 8081 \
+  --gpu_id 0 \
+  --ckpt /devwork/teja/HY-World-2.0/inference_output/masked_images/20260722_101416/gaussians.ply
+```
+
+
+The images are fed through the image segmenation model and the outputs we get blacked out persons from the image.  but the world that comes out this using the world mirror is so bad, so we need someother strategy to deal with this. since impainting in the 2d space is hard, we need to keep 3d into consideration and then get this done.
+
+
