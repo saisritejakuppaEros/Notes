@@ -138,6 +138,10 @@ pip install vllm==0.25.1 \
   --extra-index-url https://download.pytorch.org/whl/cu128
 
 
+# generate the panroma shots 
+
+
+
 
 CUDA_VISIBLE_DEVICES=1 vllm serve Qwen/Qwen3-VL-8B-Instruct \
   --served-model-name Qwen/Qwen3-VL-8B-Instruct \
@@ -176,6 +180,10 @@ export LD_LIBRARY_PATH="$CONDA_PREFIX/lib/python3.11/site-packages/nvidia/cu13/l
 
 I was getting segmentation dumped error becasue of the numpy which i got sorted later
 pip install "numpy==1.26.4"
+
+
+export HF_HOME=/workspace/teja/models
+export HF_HUB_CACHE=/workspace/teja/models/hub
 
 cd /devwork/teja/HY-World-2.0/hyworld2/worldgen
 CUDA_VISIBLE_DEVICES=0 python traj_generate.py --target_path $TARGET_PATH \
@@ -298,3 +306,134 @@ How to control and edit the meshes on the fly if in the end we dont like it.
 Datasets for training purpose:
 datasets for the panaroma generation
 datasets for the camera controlled video generation
+
+# 21 July
+
+tasks to do 
+
+1. do a survey on the object based generation
+2. do a scene based generation
+	1. do the refinement to the existing video generated output
+	2. improvise the splat if they can and give it to the computer graphics people
+3. show the outputs to alagar sir and then follow the next set of things for the synthetic scenes generation.
+
+
+Parth to deal with the object level things and see if these can be brought and refined into the 3d space somehow.
+
+I will be working on the complete scenes and see how can they be  brought in the entire 3d scenes.
+
+
+Parth to setup:
+1. https://github.com/microsoft/TRELLIS.2
+2. https://github.com/Tencent-Hunyuan/Hunyuan3D-2
+3. https://github.com/VAST-AI-Research/TripoSG
+
+
+Teja to do things:
+1. hunyuan world
+2. mesh cleaning and things for simple things
+
+The code has been pushed to 
+https://github.com/saisritejakuppaEros/SyntheticEnvGeneration
+
+this has the working code base for the hunyan world 2.0
+
+remember that this is run on the rtx machine for the inference part, since we are cut down to smaller gpu, we should be able to training things on this.
+
+Lets to do tanu weds manu:
+
+1. get an interior of the room 
+2. get the whole house
+3. get the city generated from the movie shots in a row.
+
+
+Interior of the room
+
+1. generate the scene with all the objects
+2. remove all the objects and then generate the scene
+3. generate an indoor scene and then an outdoor scene as well
+4. once these are generated compute this aganist to the cg team.
+5. now scale this to multi view image of the same room if i can to come closer to the movie.
+
+
+
+
+
+```
+
+
+# generate the trajectory
+
+source /devwork/MiniConda/miniconda3/etc/profile.d/conda.sh
+conda activate gsplat_env
+
+
+export HF_HOME=/workspace/teja/models
+export HF_HUB_CACHE=/workspace/teja/models/hub
+
+
+  
+export HF_HOME=/home/parth_h200/.cache/huggingface
+export HF_HUB_CACHE=/home/parth_h200/.cache/huggingface/hub
+export TARGET_PATH=/devwork/teja/HY-World-2.0/scenes/tanu_weds_manu_room
+export LLM_ADDR=localhost
+export LLM_PORT=8000
+export LLM_NAME=Qwen/Qwen3-VL-8B-Instruct
+
+cd /devwork/teja/HY-World-2.0/hyworld2/worldgen
+
+CUDA_VISIBLE_DEVICES=1 torchrun --nproc_per_node 1 traj_render.py \
+  --target_path "$TARGET_PATH" \
+  --llm_addr "$LLM_ADDR" --llm_port "$LLM_PORT" --llm_name "$LLM_NAME"
+
+
+CUDA_VISIBLE_DEVICES=1 torchrun --nproc_per_node 1 video_gen.py \
+  --target_path $TARGET_PATH --fsdp
+  
+
+
+
+
+# --- shared env ---
+export HF_HOME=/home/parth_h200/.cache/huggingface
+export HF_HUB_CACHE=/home/parth_h200/.cache/huggingface/hub
+export TARGET_PATH=/devwork/teja/HY-World-2.0/scenes/tanu_weds_manu_room
+export RESULT_DIR=/devwork/teja/HY-World-2.0/scenes/tanu_weds_manu_room/gs_output
+
+cd /devwork/teja/HY-World-2.0/hyworld2/worldgen
+
+CUDA_VISIBLE_DEVICES=1 torchrun --nproc_per_node 1 gen_gs_data.py \
+  --root_path "$TARGET_PATH" \
+  --save_normal \
+  --split_sky
+
+ls "$TARGET_PATH/gs_data/images" | wc -l
+ls "$TARGET_PATH/gs_data/cameras.json"
+
+export TARGET_PATH=/devwork/teja/HY-World-2.0/scenes/tanu_weds_manu_room
+export RESULT_DIR=/devwork/teja/HY-World-2.0/scenes/tanu_weds_manu_room/gs_output
+
+export TARGET_PATH=/devwork/teja/HY-World-2.0/scenes/tanu_weds_manu_room
+export RESULT_DIR=/devwork/teja/HY-World-2.0/scenes/tanu_weds_manu_room/gs_output
+
+cd /devwork/teja/HY-World-2.0/hyworld2/worldgen
+
+CUDA_VISIBLE_DEVICES=0 python -m world_gs_trainer default \
+  --data_dir "$TARGET_PATH/gs_data" \
+  --result_dir "$RESULT_DIR" \
+  --max_steps 8000 --save_steps 8000 --eval_steps 8000 --ply_steps 8000 \
+  --save_ply --convert_to_spz --disable_video \
+  --use_scale_regularization --antialiased \
+  --depth_loss --normal_loss --sky_depth_from_pcd \
+  --use_mask_gaussian --mask_export_stochastic \
+  --no-mask-export-anchor-protection --use_anchor_protection --export_mesh \
+  --strategy.refine-start-iter 800 --strategy.refine-stop-iter 4000 \
+  --strategy.refine-every 533 --strategy.refine-scale2d-stop-iter 4000 \
+  --strategy.reset-every 99990 --strategy.grow-grad2d 0.0001 --strategy.prune-scale3d 0.1
+
+python show_gs.py --port 8081 --gpu_id 0 \
+  --ckpt "$RESULT_DIR/ckpts/ckpt_7999_rank*.pt"
+  
+  
+
+```
