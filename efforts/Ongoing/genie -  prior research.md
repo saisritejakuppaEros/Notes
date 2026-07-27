@@ -525,3 +525,73 @@ export PIP_CACHE_DIR=/workspace/users/$USER/.pip-cache
 source /workspace/teja/envs/3dsyntheticdays/syntheticdata/bin/activate
 
 ```
+
+
+
+
+# July 27
+
+```
+
+(.venv) parth_h200@ai-core-team-3:/devwork/teja$ p
+ython /devwork/teja/meshcleaning/run_quadwild.py   /devwork/teja/meshcleaning/dataset/quadwild_out/sample_voxel_clean.obj   --no-preprocess   --no-smoothing   --target-tris 30000 --scale-fact 1.2   -o /devwork/teja/meshcleaning/dataset/quadwild_out/sample_quadwild.glb 
+```
+
+
+This is important for the mesh reduction, but the flow is now looking better but the no of verticies count is still high and need to reduce it.
+
+
+
+```
+cd /devwork/teja/meshcleaning
+source .venv/bin/activate
+
+# this is to run an abalation of things.
+
+python run_quadwild_ablation.py \
+  /devwork/teja/meshcleaning/dataset/quadwild_out/sample_voxel_clean.obj
+```
+
+
+
+python run_quadwild_ablation.py --only tris
+
+
+```
+Finished tris80000_scale1p20 in 18.6s -> /devwork/teja/meshcleaning/dataset/quadwild_ablation/tris80000_scale1p20.glb
+
+Wrote summary: /devwork/teja/meshcleaning/dataset/quadwild_ablation/ablation_summary.json
+
+Results:
+  [FAIL] tris= 10000  scale=1.20  ->  /devwork/teja/meshcleaning/dataset/quadwild_ablation/tris10000_scale1p20.glb
+  [OK] tris= 20000  scale=1.20  ->  /devwork/teja/meshcleaning/dataset/quadwild_ablation/tris20000_scale1p20.glb
+  [OK] tris= 30000  scale=1.20  ->  /devwork/teja/meshcleaning/dataset/quadwild_ablation/tris30000_scale1p20.glb
+  [OK] tris= 50000  scale=1.20  ->  /devwork/teja/meshcleaning/dataset/quadwild_ablation/tris50000_scale1p20.glb
+  [OK] tris= 80000  scale=1.20  ->  /devwork/teja/meshcleaning/dataset/quadwild_ablation/tris80000_scale1p20.glb
+(.venv) parth_h200@ai-core-team-3:/devwork/teja/meshcleaning$ 
+```
+
+
+
+Alright the mesh is reducing the faces and the vertices, but the mesh is not looking that good, so i will do a deeper dive to make them as gaming assets so that it can come closer to the one we wanted to do.
+
+
+
+```
+cd /devwork/teja/meshcleaning
+source .venv/bin/activate
+
+# all ablation meshes -> self-contained *_embedded.glb
+python transfer_texture.py --batch-dir dataset/quadwild_ablation
+
+# single mesh
+python transfer_texture.py \
+  --target dataset/quadwild_ablation/tris30000_scale1p20.glb \
+  -o dataset/quadwild_ablation/tris30000_scale1p20_embedded.glb
+```
+
+
+
+meshoptimzer is doing actually good, but this the mesh flow is not good in this, will be working on this further using quadwild if u can resort the mesh somehow so that i can come closer to the original one if i can.
+
+
