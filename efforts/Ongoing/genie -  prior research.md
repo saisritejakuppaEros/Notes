@@ -513,3 +513,15 @@ CUDA_VISIBLE_DEVICES=0 python show_gs.py \
 The images are fed through the image segmenation model and the outputs we get blacked out persons from the image.  but the world that comes out this using the world mirror is so bad, so we need someother strategy to deal with this. since impainting in the 2d space is hard, we need to keep 3d into consideration and then get this done.
 
 
+
+```
+
+export HF_HOME=/workspace/hf-cache
+
+export TORCH_HOME=/workspace/torch-cache
+
+export PIP_CACHE_DIR=/workspace/users/$USER/.pip-cache
+
+source /workspace/teja/envs/3dsyntheticdays/syntheticdata/bin/activate
+
+```
