@@ -41,12 +41,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "efforts/Notes/Online Courses/vllm Inference/redhat_vllm_course.md",
+                "file": "efforts/Ongoing/genie -  prior research.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "redhat_vllm_course"
+              "title": "genie -  prior research"
             }
           }
         ],
@@ -225,11 +225,12 @@
   },
   "active": "750c125c1db751db",
   "lastOpenFiles": [
+    "calender/2026-07-28.md",
+    "calender/2026-07-27.md",
+    "efforts/Notes/Online Courses/vllm Inference/redhat_vllm_course.md",
     "efforts/Ongoing/genie -  prior research.md",
     "efforts/Notes/system design/may23 - Introduction to system design.md",
     "efforts/Notes/Online Courses/List of online courses.md",
-    "efforts/Notes/Online Courses/vllm Inference/redhat_vllm_course.md",
-    "calender/2026-07-27.md",
     "calender/2026-07-22.md",
     "efforts/Notes/ImageGeneration/03_architecture_designs.md",
     "efforts/Notes/language modelling from scratch/03_architectures.md",
@@ -254,7 +255,6 @@
     "efforts/Notes/ImageGeneration/Image Generation.md",
     "efforts/sleeping/agentic ai.md",
     "efforts/sleeping/system design timeline.md",
-    "efforts/sleeping/RefCompose.md",
     "efforts/Notes/Online Courses/EdgeDevice AI",
     "efforts/Notes/language modelling from scratch",
     "efforts/sleeping/Untitled",

@@ -595,3 +595,18 @@ python transfer_texture.py \
 meshoptimzer is doing actually good, but this the mesh flow is not good in this, will be working on this further using quadwild if u can resort the mesh somehow so that i can come closer to the original one if i can.
 
 
+---
+
+July 28
+
+alright today we are optimizing the meshes from the original source of the rodin.
+
+i have pluged in meshoptimier, the flow is gone entirely which is something that they cant use again. 
+
+so after plug and play of things, what i realized is that using various combinations dont work, rather we should think of a smarter trick.
+
+But from the vignesh insights, what we should be doing is to make the meshflow right as good as possible.
+
+This is indeed a tougher task, but the follwing set of things to do is to first make the mesh to be composed and solid.
+
+Then use the quadflow and quadwild and finish up the task so that we are good to go with for today.
