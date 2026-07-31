@@ -1253,6 +1253,33 @@ The highest-impact improvements are:
 
 
 
+
+
+
+```
+
+
+source /devwork/MiniConda/miniconda3/etc/profile.d/conda.sh
+conda activate gsplat_env
+cd /devwork/teja/MovieSetReconstruction/3d_recon/scripts
+
+python run_worldstereo.py \
+  --scene_dir /devwork/teja/MovieSetReconstruction/sample_dataset/pinga_hy \
+  --model_type worldstereo-memory \
+  --gpus 0,1 \
+  --nproc 2 \
+  --fsdp \
+  --local_files_only \
+  --hf_hub_cache /workspace/teja/models/hub
+  
+  
+  
+  
+  
+```
+
+
+
 |**Project**|**This Week (Progress)**|**Next Week (Plan)**|
 |---|---|---|
 |**Object Reconstruction**|- Evaluated multiple mesh optimization and remeshing approaches (MeshOptimizer, QuadWild, QuadFlow) to improve topology while reducing mesh complexity.- Identified that although polygon reduction is effective, mesh flow and topology quality are still not suitable for production-quality assets.- Began investigating improved remeshing strategies to preserve object geometry while generating cleaner quad-based meshes.|- Improve mesh topology while maintaining geometric fidelity.- Develop a robust quad-remeshing pipeline that produces cleaner, game-ready assets with significantly lower polygon count.- Benchmark different remeshing strategies and finalize the best pipeline for object reconstruction.|
