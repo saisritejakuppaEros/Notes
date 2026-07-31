@@ -610,3 +610,654 @@ But from the vignesh insights, what we should be doing is to make the meshflow r
 This is indeed a tougher task, but the follwing set of things to do is to first make the mesh to be composed and solid.
 
 Then use the quadflow and quadwild and finish up the task so that we are good to go with for today.
+
+```
+source /devwork/teja/meshcleaning/.venv/bin/activate
+
+# Python wrapper (GLB/OBJ, auto-prep + GLB export)
+python scripts/run_autoremesher.py dataset/rodin_3.obj --target-quads 5000
+```
+
+
+
+----
+
+July 30
+
+The output fr the objects are good but the results are not sufficient and we need to somehow make the object to quad and somehow reduce the mesh as well.
+
+the scene i tried doing the pinga song vggt omega and i find the results to be bad and need to be improvised to an extent somehow.
+
+---
+
+
+July 31
+
+Now that i have used gemini to get the 4 sides of the pinga, using a depth math to stich the point cloud with hand, so that we are not leaving things to the ai.
+
+moge is used to get the dense depth maps
+
+```
+# run_moge_depth
+Generates metric depth maps for all images in an input folder using the MoGe v2 model.
+## Functions
+- `load_model` — Loads MoGe from the local Hugging Face cache.
+
+- `predict_depth` — Runs depth inference on a single RGB image.
+
+- `process_folder` — Processes every image in a directory and writes depth PNGs.
+## Example
+```bash
+
+source /devwork/MiniConda/miniconda3/etc/profile.d/conda.sh
+conda activate gsplat_env
+python scripts/run_moge_depth.py \
+  --input_dir /devwork/teja/MovieSetReconstruction/sample_dataset/pinga \
+  --output_dir /devwork/teja/MovieSetReconstruction/sample_dataset/pinga_depth
+
+```
+
+
+
+
+from the moge i have got the global pcd.
+
+```
+source /devwork/MiniConda/miniconda3/etc/profile.d/conda.sh
+conda activate gsplat_env
+cd /devwork/teja/MovieSetReconstruction/3d_recon/scripts
+
+python view_global_pcd.py \
+  --rgb_dir /devwork/teja/MovieSetReconstruction/sample_dataset/pinga \
+  --depth_dir /devwork/teja/MovieSetReconstruction/sample_dataset/pinga_depth \
+  --hfov_deg 75 \
+  --stride 4 \
+  --point_size 0.015 \
+  --port 8080
+```
+
+
+
+
+use the video model to inpaint as much as information closer to what we have.
+
+
+The hy 2.0 world uses vlm for generating trajectory, but I cant use this becasue i dont have the panaroma, so I am using the pcd data as an anchor point to generate the trajectory and now its doing fine fr the pinga song.
+```
+cd /devwork/teja/MovieSetReconstruction/3d_recon/scripts
+python generate_trajectories.py
+python view_trajectories.py --port 8081
+```
+
+
+
+
+
+## Plan: MovieSet → WorldStereo → 3D world frames
+
+HY-World 2.0 runs in 3 stages. We skip Stage 1 (`traj_generate.py`) because you already have PCD + trajectories.
+
+pinga RGB + depthprepare_hy_scene.pyglobal PCD + trajectoriesHY scene layoutrender_trajectories.pyrender.mp4 + render_mask.mp4run_worldstereo.pyworldstereo-memory-dmd_result.mp4extract_frames.pyextracted_frames/ for 3DGS
+
+|Stage|Script|What it does|
+|---|---|---|
+|0. Adapter|`prepare_hy_scene.py`|Converts your data → HY layout|
+|1. PCD render|`render_trajectories.py`|Point-splat conditioning videos|
+|2. WorldStereo|`run_worldstereo.py`|Diffusion inpainting/expansion|
+|3. Frame export|`extract_frames.py`|PNGs + cameras for 3D world build|
+
+---
+
+## New scripts (in `3d_recon/scripts/`)
+
+|File|Role|
+|---|---|
+|`hy_format.py`|NPZ→PLY, pano_bank, camera.json (w2c), depth stub|
+|`prepare_hy_scene.py`|Builds full HY scene directory|
+|`render_trajectories.py`|PCD splat renders via HY-World `pointcloud.py`|
+|`run_worldstereo.py`|Launches HY `video_gen.py`|
+|`extract_frames.py`|Extracts frames + cameras from result videos|
+
+Docs: `docs/prepare_hy_scene.md`, `render_trajectories.md`, `run_worldstereo.md`, `extract_frames.md`
+
+---
+
+```
+source /devwork/MiniConda/miniconda3/etc/profile.d/conda.sh
+conda activate gsplat_env
+cd /devwork/teja/MovieSetReconstruction/3d_recon/scripts
+
+# Step 0 — already done; re-run if needed:
+python prepare_hy_scene.py --regenerate_trajectories
+
+
+# the below command is working good for the pinga song and was able to generate the trajectories.
+
+# Step 1 — PCD conditioning videos (needs GPU + pytorch3d from HY-World)
+python render_trajectories.py \
+  --scene_dir /devwork/teja/MovieSetReconstruction/sample_dataset/pinga_hy
+
+# Step 2 — WorldStereo diffusion (multi-GPU recommended)
+python run_worldstereo.py \
+  --scene_dir /devwork/teja/MovieSetReconstruction/sample_dataset/pinga_hy \
+  --gpus 0,1 --nproc 2 --fsdp
+
+# Step 3 — extract frames for 3D world building
+python extract_frames.py \
+  --scene_dir /devwork/teja/MovieSetReconstruction/sample_dataset/pinga_hy \
+  --source worldstereo
+  
+  
+cd /devwork/teja/HY-World-2.0/hyworld2/worldgen
+torchrun --nproc_per_node 4 gen_gs_data.py \
+  --root_path /devwork/teja/MovieSetReconstruction/sample_dataset/pinga_hy \
+  --save_normal --split_sky
+```
+
+
+The videos generated are not that good, becuase of the bad trajectory in the first place. I need to make them better in 2 perspecives
+
+1. make smoother trajectoty
+2. make video model to inpaint things.
+
+
+Fixing both the issues for this.
+
+
+
+```
+source /devwork/MiniConda/miniconda3/etc/profile.d/conda.sh
+conda activate gsplat_env
+
+
+source /devwork/MiniConda/miniconda3/etc/profile.d/conda.sh
+conda activate gsplat_env
+cd /devwork/teja/MovieSetReconstruction/3d_recon/scripts
+
+python view_global_pcd.py \
+  --rgb_dir /devwork/teja/MovieSetReconstruction/sample_dataset/pinga \
+  --depth_dir /devwork/teja/MovieSetReconstruction/sample_dataset/pinga_depth \
+  --output_dir /devwork/teja/MovieSetReconstruction/sample_dataset/pinga_global
+  
+  
+  
+  
+  
+  
+
+cd /devwork/teja/MovieSetReconstruction/3d_recon/scripts
+
+python generate_trajectories.py \
+
+--pcd_npz /devwork/teja/MovieSetReconstruction/sample_dataset/pinga_global/global_pcd.npz \
+
+--output_dir /devwork/teja/MovieSetReconstruction/sample_dataset/pinga_global/trajectories \
+
+--num_frames 21
+
+
+
+
+python prepare_hy_scene.py --scene_dir /devwork/teja/MovieSetReconstruction/sample_dataset/pinga_hy --rgb_dir /devwork/teja/MovieSetReconstruction/sample_dataset/pinga --depth_dir /devwork/teja/MovieSetReconstruction/sample_dataset/pinga_depth --global_dir /devwork/teja/MovieSetReconstruction/sample_dataset/pinga_global
+
+
+
+CUDA_VISIBLE_DEVICES=0 python render_trajectories.py --scene_dir /devwork/teja/MovieSetReconstruction/sample_dataset/pinga_hy
+
+
+
+
+
+
+  
+python run_worldstereo.py \
+
+--scene_dir /devwork/teja/MovieSetReconstruction/sample_dataset/pinga_hy \
+
+--gpus 0 --nproc 1 --fsdp --local_files_only
+```
+
+
+
+
+The outputs are not good because, there is a lot of information to be filled up by the vidoe model so its not working well, pivoting to new method so that we will make the model to do most of the inpainting.
+
+
+# Why Some Holes Remain Unfilled in WorldStereo
+
+## Pipeline
+
+```text
+global_pcd.ply
+    ↓
+Point Splat Renderer
+    ↓
+render.mp4 + render_mask.mp4
+    ↓
+WorldStereo Diffusion
+    ↓
+worldstereo-memory-dmd_result.mp4
+```
+
+- `render.mp4` is only the raw point cloud render before diffusion, so gray holes are expected.
+- `render_mask.mp4` marks missing regions (white = holes, black = valid PCD geometry).
+- `worldstereo-memory-dmd_result.mp4` is the final generated output.
+
+## Main Reason
+
+The biggest reason holes remain is that **WorldStereo is not a hard inpainting model**. The mask is only used as **ControlNet guidance**, meaning it tells the model where generation is preferred but does **not force** masked pixels to be replaced. As a result, some hole regions may remain close to the original gray PCD render, especially when the conditioning is weak.
+
+## Contributing Factors
+
+- **Sparse point cloud:** Many trajectories have **50–68% missing pixels**, requiring the model to hallucinate a large portion of the image.
+- **Limited panorama memory:** Only four cardinal reference views (front, right, back, left) are available, providing limited appearance information for unseen viewpoints.
+- **Wonder trajectories:** These start from rendered PCD frames rather than real images, giving weaker appearance priors than `view0`.
+- **DMD mode:** The `worldstereo-memory-dmd` pipeline uses only **4 denoising steps** with **CFG = 1.0**, prioritizing speed over generation quality.
+- **First frame:** Frame 0 is intentionally copied from the original image and is never inpainted.
+
+## Key Takeaway
+
+The PCD pipeline itself is correct (`PCD → splat render → diffusion`). The main limitation is architectural: **WorldStereo treats the mask as soft guidance rather than mandatory inpainting**. Combined with sparse PCD coverage and limited panorama memory, some masked regions remain only partially filled instead of being fully regenerated.
+
+
+
+
+
+
+
+
+further steps
+
+# Improving Hole Filling in WorldStereo
+
+This document outlines the recommended workflow for improving hole filling quality in the HY-World / WorldStereo pipeline.
+
+---
+
+# Step 0: Verify the Correct Output
+
+Always compare the following three files together:
+
+| File | Purpose |
+|------|----------|
+| `render.mp4` | Raw PCD render (conditioning input). Gray regions are expected holes. |
+| `render_mask.mp4` | White = missing pixels (should be generated), Black = valid geometry (should stay similar). |
+| `worldstereo-memory-dmd_result.mp4` | Final diffusion output. Evaluate hole filling only here. |
+
+> **Important:** Do **not** judge hole filling quality from `render.mp4`. It is only the conditioning render before diffusion.
+
+---
+
+# Step 1: Switch to the Full WorldStereo Model
+
+The current pipeline uses:
+
+- `worldstereo-memory-dmd`
+- 4 denoising steps
+- CFG = 1.0
+
+This is optimized for speed rather than quality.
+
+The full `worldstereo-memory` model performs significantly better because it uses:
+
+- Multi-step diffusion
+- Classifier-Free Guidance (CFG = 5.0)
+
+## Download the Full Model
+
+```bash
+source /devwork/MiniConda/miniconda3/etc/profile.d/conda.sh
+conda activate gsplat_env
+
+python -c "from huggingface_hub import snapshot_download; snapshot_download('hanshanxue/WorldStereo', allow_patterns='worldstereo-memory/*', cache_dir='/workspace/teja/models/hub')"
+```
+
+---
+
+## Delete Previous Results
+
+```bash
+rm -f /devwork/teja/MovieSetReconstruction/sample_dataset/pinga_hy/render_results/*/traj*/*_result.mp4
+
+rm -rf /devwork/teja/MovieSetReconstruction/sample_dataset/pinga_hy/render_results/generation_bank_*
+```
+
+---
+
+## Run the Full Model
+
+```bash
+cd /devwork/teja/MovieSetReconstruction/3d_recon/scripts
+
+source /devwork/MiniConda/miniconda3/etc/profile.d/conda.sh
+conda activate gsplat_env
+
+cd /devwork/teja/MovieSetReconstruction/3d_recon/scripts
+
+python run_worldstereo.py \
+  --scene_dir /devwork/teja/MovieSetReconstruction/sample_dataset/pinga_hy \
+  --model_type worldstereo-memory \
+  --gpus 0,1 --nproc 2 --fsdp \
+  --local_files_only
+```
+
+---
+
+# Step 2: Reduce Hole Coverage
+
+Currently, many frames contain **50–68% missing pixels**.
+
+The more missing pixels there are, the harder the diffusion model must hallucinate.
+
+Reduce hole coverage by increasing the splat size.
+
+Modify `render_trajectories.py`:
+
+```python
+render_radius = 0.015   # or 0.020
+points_per_pixel = 30   # or 40
+```
+
+(Current values are `0.008` and `20`.)
+
+---
+
+## Re-render
+
+```bash
+python render_trajectories.py \
+    --scene_dir /devwork/teja/MovieSetReconstruction/sample_dataset/pinga_hy
+```
+
+---
+
+## Run WorldStereo Again
+
+```bash
+python run_worldstereo.py \
+    --scene_dir /devwork/teja/MovieSetReconstruction/sample_dataset/pinga_hy \
+    --model_type worldstereo-memory \
+    --gpus 0,1,2,3 \
+    --nproc 4 \
+    --fsdp
+```
+
+### Goal
+
+Reduce hole coverage below **30%**.
+
+Less white in `render_mask.mp4` generally leads to better generation.
+
+Additional upstream improvements:
+
+- Build a denser `global_pcd.ply`
+- Reduce camera motion between frames
+
+---
+
+# Step 3: Improve the Memory Bank
+
+WorldStereo fills holes by retrieving appearance information from previous views.
+
+Currently the panorama memory contains only:
+
+- Front
+- Right
+- Back
+- Left
+
+This is often insufficient for `wonder_*` trajectories.
+
+---
+
+## 3.1 Run the Entire Scene
+
+Always run the complete scene instead of individual wonder trajectories.
+
+This allows:
+
+```
+view0
+    ↓
+generation_bank updated
+    ↓
+wonder_0
+    ↓
+wonder_1
+    ↓
+...
+```
+
+Later trajectories benefit from earlier generations.
+
+Run:
+
+```bash
+python run_worldstereo.py \
+    --scene_dir /devwork/teja/MovieSetReconstruction/sample_dataset/pinga_hy \
+    --model_type worldstereo-memory
+```
+
+---
+
+## 3.2 Two-Pass Generation
+
+After the first pass:
+
+Keep:
+
+```
+generation_bank_worldstereo-memory/
+```
+
+Delete only poor trajectories:
+
+```bash
+rm -f .../render_results/wonder_{0,1,7,8}/traj0/worldstereo-memory_result.mp4
+```
+
+Run WorldStereo again.
+
+The richer memory bank often improves difficult trajectories.
+
+---
+
+## 3.3 Increase Retrieved References (Optional)
+
+Instead of using `run_worldstereo.py`, directly call `video_gen.py`.
+
+```bash
+cd /devwork/teja/HY-World-2.0
+
+torchrun --nproc_per_node=4 \
+    hyworld2/worldgen/video_gen.py \
+    --target_path /devwork/teja/MovieSetReconstruction/sample_dataset/pinga_hy \
+    --model_type worldstereo-memory \
+    --max_reference 12 \
+    --align_nframe 8 \
+    --fsdp
+```
+
+Inspect:
+
+```
+memory_inputs/worldstereo-memory.mp4
+```
+
+It should contain correctly aligned RGB reference frames.
+
+If this video is empty or misaligned, hole filling quality will be poor regardless of the diffusion model.
+
+---
+
+# Step 4: Improve Wonder Start Frames
+
+`view0` starts from a real RGB image.
+
+`wonder_*` starts from a sparse PCD render.
+
+This weakens the image-to-video conditioning.
+
+Instead:
+
+- Find the nearest cardinal camera.
+- Copy that real RGB image.
+- Resize to **832 × 480**.
+- Save as:
+
+```
+render_results/wonder_x/start_frame.png
+```
+
+Then rerun:
+
+```bash
+python render_trajectories.py ...
+
+python run_worldstereo.py ...
+```
+
+Using a real photo as the initial frame provides much stronger appearance guidance.
+
+---
+
+# Step 5: Expand the Panorama Bank
+
+Currently:
+
+```
+Front
+Right
+Back
+Left
+```
+
+If additional RGB-D views are available (diagonal, elevated, etc.), add them to:
+
+```
+pano_bank/images/
+pano_bank/depths/
+```
+
+Update:
+
+```
+cameras.json
+```
+
+More reference images improve memory retrieval and hole filling.
+
+---
+
+# Step 6: Debug Checklist
+
+For every poor trajectory:
+
+### 1. Check Hole Coverage
+
+Open:
+
+```
+render_mask.mp4
+```
+
+Target:
+
+```
+< 30% white pixels
+```
+
+---
+
+### 2. Check Memory Retrieval
+
+Open:
+
+```
+memory_inputs/worldstereo-memory.mp4
+```
+
+Verify that:
+
+- reference images are correct
+- alignment looks reasonable
+- scene content matches the target view
+
+---
+
+### 3. Compare Hole Regions Only
+
+Compare:
+
+```
+render.mp4
+↓
+
+render_mask.mp4
+↓
+
+worldstereo-memory_result.mp4
+```
+
+Only **white mask regions** are expected to change.
+
+Black regions already contain valid geometry and should remain structurally similar.
+
+---
+
+# Troubleshooting
+
+| Symptom | Likely Cause | Solution |
+|----------|-------------|----------|
+| White holes remain gray | DMD model / weak memory | Step 1 + Step 3 |
+| Almost entire frame is white | Sparse PCD | Step 2 |
+| `view0` good, `wonder_*` poor | Weak start frame | Step 4 |
+| `memory_inputs` looks wrong | Panorama alignment issue | Step 5 |
+| No visible changes after rerun | Old outputs reused | Delete previous results |
+
+---
+
+# Recommended Workflow
+
+1. Delete previous `*_result.mp4` files and `generation_bank_*`.
+2. Increase splat radius to reduce hole coverage.
+3. Replace `wonder_*` start frames with the nearest real RGB image.
+4. (Optional) Expand the panorama memory with more reference views.
+5. Run the full `worldstereo-memory` model on the entire scene.
+6. Inspect `memory_inputs/*.mp4`.
+7. Delete only poor trajectories and rerun using the enriched memory bank.
+8. Evaluate only `worldstereo-memory_result.mp4` together with `render_mask.mp4`.
+
+---
+
+# Expected Outcome
+
+Even after these improvements, WorldStereo is **not** a hard inpainting model.
+
+Expected behavior:
+
+- ✅ White mask regions should become significantly more complete and realistic.
+- ✅ Black mask regions should remain close to the original PCD render.
+- ❌ Every masked pixel will **not** necessarily be replaced.
+
+This is an architectural limitation because the mask is used as **soft ControlNet guidance** rather than an enforced inpainting mask.
+
+The highest-impact improvements are:
+
+1. Use the full `worldstereo-memory` model.
+2. Reduce hole coverage by increasing PCD density.
+3. Improve the panorama memory.
+4. Use stronger real-image start frames for `wonder_*` trajectories.
+
+
+
+
+
+|**Project**|**This Week (Progress)**|**Next Week (Plan)**|
+|---|---|---|
+|**Object Reconstruction**|- Evaluated multiple mesh optimization and remeshing approaches (MeshOptimizer, QuadWild, QuadFlow) to improve topology while reducing mesh complexity.- Identified that although polygon reduction is effective, mesh flow and topology quality are still not suitable for production-quality assets.- Began investigating improved remeshing strategies to preserve object geometry while generating cleaner quad-based meshes.|- Improve mesh topology while maintaining geometric fidelity.- Develop a robust quad-remeshing pipeline that produces cleaner, game-ready assets with significantly lower polygon count.- Benchmark different remeshing strategies and finalize the best pipeline for object reconstruction.|
+|**Scene Reconstruction**|- Shifted from panorama-based scene generation to a point-cloud-driven reconstruction pipeline using multi-view images and depth estimation (MoGe).- Built global point clouds, generated camera trajectories, and integrated the pipeline with HY-World / WorldStereo.- Identified that reconstruction quality is currently limited by sparse point clouds, suboptimal trajectories, and incomplete diffusion-based hole filling.|- Improve trajectory generation for smoother camera motion and better scene coverage.- Increase point cloud density to reduce missing regions before diffusion.- Improve WorldStereo inpainting quality by strengthening conditioning inputs and memory retrieval, with the goal of producing higher-quality reconstructed scenes suitable for downstream 3D reconstruction.|
+
+End of the July Week
+
+---

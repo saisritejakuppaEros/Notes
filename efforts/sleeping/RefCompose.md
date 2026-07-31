@@ -195,3 +195,7 @@ July 18 and 19
 
 The picture for the papers  are in progress and has created all the necessary pictures.
 
+July 27
+
+The paper has been submitted to the conference of eccv workshop and the results are on the august 9.
+
