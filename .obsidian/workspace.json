@@ -83,12 +83,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "efforts/Ongoing/genie -  prior research.md",
+                "file": "calender/2026-08-05.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "genie -  prior research"
+              "title": "2026-08-05"
             }
           }
         ],
@@ -267,16 +267,20 @@
   },
   "active": "82913e62e85c5c50",
   "lastOpenFiles": [
-    "efforts/sleeping/tensorrt.md",
-    "calender/2026-07-31.md",
+    "calender/2026-08-03.md",
+    "calender/2026-08-05.md",
     "efforts/Ongoing/genie -  prior research.md",
+    "calender/2026-08-04.md",
+    "calender/2026-07-17.md",
+    "calender/2026-07-20.md",
+    "calender/2026-07-31.md",
+    "efforts/sleeping/tensorrt.md",
     "efforts/sleeping/ProjectEducationMovies.md",
     "calender/2026-07-30.md",
     "efforts/sleeping/AI doing Research.md",
     "efforts/sleeping/agentic ai.md",
     "efforts/sleeping/RefCompose.md",
     "calender/2026-07-16.md",
-    "calender/2026-07-20.md",
     "calender/2026-07-21.md",
     "calender/2026-07-22.md",
     "calender/2026-07-27.md",
@@ -289,13 +293,9 @@
     "efforts/Notes/language modelling from scratch/03_architectures.md",
     "efforts/Notes/language modelling from scratch/02_pytorch.md",
     "efforts/Notes/language modelling from scratch/01_tokenization.md",
-    "efforts/Notes/Online Courses/EdgeDevice AI/On DeviceAI.md",
-    "efforts/Notes/Information/Blogs.md",
     "efforts/Notes/Online Courses/vllm Inference",
     "Untitled",
     "efforts/Notes/Online Courses",
-    "efforts/Notes/ImageGeneration/013_data_preparation.md",
-    "efforts/Notes/ImageGeneration/09_evaluation.md",
     "efforts/Notes/Information",
     "efforts/Notes/Online Courses/EdgeDevice AI",
     "efforts/Notes/language modelling from scratch",

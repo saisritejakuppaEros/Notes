@@ -1249,13 +1249,6 @@ The highest-impact improvements are:
 3. Improve the panorama memory.
 4. Use stronger real-image start frames for `wonder_*` trajectories.
 
-
-
-
-
-
-
-
 ```
 
 
@@ -1288,3 +1281,51 @@ python run_worldstereo.py \
 End of the July Week
 
 ---
+
+Aug 03
+
+Scene level recon
+
+all the there are too many voids because of this the video model is not doing good, the goal further now is to make the voids to reduce as much down as possible somehow using a image model to be incoherence somehow using image models.
+
+remove the floor from the images so that we can stay on the same ground at the same level.
+
+repair the images before feeding into the models somehow and then work it out
+
+get the corner states and then update the point cloud using the image model and then work on top of it.
+
+Make the corner image using the image generative models and keep the inpainting somehow using an agentic ai somehow closer to the original one.
+
+
+Google Drive Links:
+https://docs.google.com/presentation/d/1ZRwQ-yZOEgyfyMIyB8X9Riph1nOoLoCzkaY4Mt--gUk/edit?usp=sharing
+
+Slide 88 has the output what it was meant to be when i say i built a 3d scene, as u see the corners are left out.
+
+slide 89 has the depth perception going down so that we need to fix that.
+
+slide 90 has the voids breaking down the goal is to keep the flux 2.0 to inpaint the things so that we can make an asthetic outputs for now, but this is not the ideal way, we need to edit somehow from the original images.
+
+
+I have tried to do the object level things, but the outcomes are not good becasue the meshes are getting reduced drastically.
+
+I am working on the scene part, but the deal is multi view generation is still hard and the flux 2.0 is not inpatinting the right way, we need to somehow make the models works to our will.
+
+
+
+---
+
+Aug 4
+
+next set of things to do related to mesh are
+
+1. [https://arxiv.org/pdf/2607.28675](https://arxiv.org/pdf/2607.28675 "https://arxiv.org/pdf/2607.28675")
+2. [GitHub - zhaorw02/DeepMesh: [ICCV 2025] Official code of DeepMesh: Auto-Regressive Artist-mesh Creat…](https://github.com/zhaorw02/DeepMesh "https://github.com/zhaorw02/deepmesh")
+3. [GitHub - facebookresearch/meshflow: Repository for the CVPR 2026 paper MeshFlow Efficient Artistic M…](https://github.com/facebookresearch/meshflow "https://github.com/facebookresearch/meshflow")
+
+
+The meshy T2 is yet to be released, but I guess this would be sota for the dealing the things.
+
+meshflow requires permissions for the model. update accepted.
+
+setting up the deepmesh
